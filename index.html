@@ -1,576 +1,177 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>畢業感謝老師</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>謝謝老師</title>
 
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: linear-gradient(135deg, #fff7f0, #ffeef5, #eef7ff);
-      color: #5a4b5f;
-      position: relative;
-    }
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg,#fff0f5,#f0f8ff);
+  overflow: hidden;
+  font-family: "Microsoft JhengHei";
+}
 
-    /* 背景光暈 */
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: 0;
-      opacity: 0.45;
-    }
+/* 🌸 櫻花 */
+.sakura {
+  position: fixed;
+  top: -10px;
+  width: 15px;
+  height: 15px;
+  background: pink;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: fall linear infinite;
+}
 
-    body::before {
-      width: 300px;
-      height: 300px;
-      background: #ffd6e7;
-      top: 8%;
-      left: 5%;
-      animation: floatGlow 8s ease-in-out infinite;
-    }
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
 
-    body::after {
-      width: 350px;
-      height: 350px;
-      background: #cfe8ff;
-      bottom: 5%;
-      right: 5%;
-      animation: floatGlow 10s ease-in-out infinite reverse;
-    }
+/* ✨ 粒子 */
+.particle {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px white;
+  animation: float 5s infinite;
+}
 
-    @keyframes floatGlow {
-      0%, 100% { transform: translateY(0px) translateX(0px); }
-      50% { transform: translateY(-20px) translateX(15px); }
-    }
+@keyframes float {
+  0% { transform: translateY(0); opacity:0;}
+  50% {opacity:1;}
+  100% { transform: translateY(-100px); opacity:0;}
+}
 
-    /* 漂浮愛心 */
-    .hearts {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
-    }
+/* 🎤 主文字 */
+.container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  top: 20vh;
+  color: #6b4c5a;
+}
 
-    .heart {
-      position: absolute;
-      bottom: -30px;
-      font-size: 20px;
-      animation: rise linear infinite;
-      opacity: 0.7;
-    }
+h1 {
+  font-size: 3em;
+  text-shadow: 0 0 20px rgba(255,150,200,0.6);
+}
 
-    .heart:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; color: #ff8fb1; }
-    .heart:nth-child(2) { left: 25%; animation-duration: 13s; animation-delay: 2s; color: #ffc1d6; }
-    .heart:nth-child(3) { left: 40%; animation-duration: 11s; animation-delay: 4s; color: #ff9db8; }
-    .heart:nth-child(4) { left: 60%; animation-duration: 14s; animation-delay: 1s; color: #ffb7d3; }
-    .heart:nth-child(5) { left: 78%; animation-duration: 12s; animation-delay: 3s; color: #ff8fb1; }
-    .heart:nth-child(6) { left: 90%; animation-duration: 15s; animation-delay: 5s; color: #ffd4e3; }
+/* 打字機 */
+.typing {
+  font-size: 1.3em;
+  margin-top: 20px;
+  border-right: 2px solid;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 5s steps(40) forwards, blink .7s infinite;
+}
 
-    @keyframes rise {
-      0% {
-        transform: translateY(0) scale(0.8) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-110vh) scale(1.4) rotate(20deg);
-        opacity: 0;
-      }
-    }
+@keyframes typing {
+  to { width: 80%; }
+}
 
-    /* 漂浮光點 */
-    .sparkles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
+@keyframes blink {
+  50% { border-color: transparent; }
+}
 
-    .sparkle {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: 0 0 12px rgba(255,255,255,0.95);
-      animation: twinkle 4s infinite ease-in-out;
-    }
+/* 🌱 樹 */
+.tree {
+  margin-top: 80px;
+}
 
-    .sparkle:nth-child(1) { top: 12%; left: 20%; animation-delay: 0s; }
-    .sparkle:nth-child(2) { top: 25%; left: 75%; animation-delay: 1s; }
-    .sparkle:nth-child(3) { top: 55%; left: 15%; animation-delay: 2s; }
-    .sparkle:nth-child(4) { top: 70%; left: 82%; animation-delay: 1.5s; }
-    .sparkle:nth-child(5) { top: 38%; left: 50%; animation-delay: 0.5s; }
-    .sparkle:nth-child(6) { top: 82%; left: 35%; animation-delay: 2.5s; }
+.stem {
+  width: 10px;
+  height: 0;
+  background: green;
+  margin: auto;
+  animation: grow 3s forwards;
+}
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.25; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.6); }
-    }
+@keyframes grow {
+  to { height: 100px; }
+}
 
-    .container {
-      position: relative;
-      z-index: 2;
-      width: 90%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 50px 0 80px;
-    }
+.leaf {
+  width: 30px;
+  height: 20px;
+  background: lightgreen;
+  border-radius: 50%;
+  margin: auto;
+  opacity: 0;
+  animation: leafGrow 2s forwards;
+  animation-delay: 3s;
+}
 
-    .hero {
-      text-align: center;
-      padding: 60px 20px 40px;
-      animation: fadeUp 1.4s ease both;
-    }
+@keyframes leafGrow {
+  to { opacity: 1; transform: scale(1.5); }
+}
 
-    .hero .tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(10px);
-      color: #b05c7d;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 15px;
-      box-shadow: 0 8px 20px rgba(176, 92, 125, 0.12);
-      margin-bottom: 25px;
-    }
+/* 💫 滑鼠光點 */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: pink;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 20px pink;
+}
 
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      color: #7b4f68;
-      text-shadow: 0 4px 15px rgba(123, 79, 104, 0.15);
-      margin-bottom: 18px;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      line-height: 1.9;
-      color: #6d6071;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .floating-card {
-      background: rgba(255, 255, 255, 0.58);
-      border: 1px solid rgba(255,255,255,0.5);
-      backdrop-filter: blur(14px);
-      border-radius: 28px;
-      box-shadow: 0 18px 35px rgba(129, 120, 160, 0.15);
-      padding: 35px 28px;
-      margin: 30px 0;
-      animation: fadeUp 1.4s ease both;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-
-    .floating-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 22px 45px rgba(129, 120, 160, 0.22);
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      color: #8a5d74;
-      margin-bottom: 18px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-title::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(90deg, #ffd4e3, #dbeeff);
-      border-radius: 999px;
-      z-index: -1;
-    }
-
-    .message {
-      font-size: 1.08rem;
-      line-height: 2;
-      color: #5f5563;
-      white-space: pre-line;
-    }
-
-    .highlight {
-      color: #d46b97;
-      font-weight: bold;
-    }
-
-    .quotes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 22px;
-      margin-top: 20px;
-    }
-
-    .quote-box {
-      padding: 25px;
-      border-radius: 24px;
-      color: #5a4e63;
-      box-shadow: 0 10px 25px rgba(122, 103, 148, 0.12);
-      animation: floatCard 4s ease-in-out infinite;
-    }
-
-    .quote-box:nth-child(1) {
-      background: linear-gradient(135deg, #ffe3ec, #fff5f8);
-    }
-
-    .quote-box:nth-child(2) {
-      background: linear-gradient(135deg, #e7f2ff, #f4f9ff);
-      animation-delay: 0.8s;
-    }
-
-    .quote-box:nth-child(3) {
-      background: linear-gradient(135deg, #fff2da, #fffaf1);
-      animation-delay: 1.6s;
-    }
-
-    .quote-box h3 {
-      margin-bottom: 12px;
-      color: #8a6078;
-    }
-
-    .quote-box p {
-      line-height: 1.8;
-    }
-
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-
-    /* 小樹苗動畫 */
-    .tree-section {
-      text-align: center;
-      padding: 30px 10px 10px;
-      animation: fadeUp 1.8s ease both;
-    }
-
-    .tree-wrapper {
-      width: 180px;
-      height: 220px;
-      margin: 0 auto 20px;
-      position: relative;
-    }
-
-    .soil {
-      position: absolute;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 140px;
-      height: 35px;
-      background: #9f7b63;
-      border-radius: 50%;
-      box-shadow: inset 0 8px 12px rgba(0,0,0,0.1);
-    }
-
-    .stem {
-      position: absolute;
-      bottom: 52px;
-      left: 50%;
-      width: 8px;
-      height: 0;
-      background: linear-gradient(to top, #5f9c4c, #8bcf77);
-      transform: translateX(-50%);
-      border-radius: 10px;
-      animation: growStem 3s ease forwards;
-      animation-delay: 0.8s;
-    }
-
-    .leaf {
-      position: absolute;
-      width: 0;
-      height: 0;
-      background: linear-gradient(135deg, #8fd88a, #53a95c);
-      border-radius: 100% 0 100% 0;
-      opacity: 0;
-      transform-origin: bottom center;
-    }
-
-    .leaf.left {
-      bottom: 120px;
-      left: 50%;
-      transform: translateX(-100%) rotate(-35deg) scale(0);
-      animation: growLeafLeft 1.8s ease forwards;
-      animation-delay: 3.2s;
-    }
-
-    .leaf.right {
-      bottom: 132px;
-      left: 50%;
-      transform: translateX(0%) rotate(35deg) scale(0);
-      animation: growLeafRight 1.8s ease forwards;
-      animation-delay: 3.6s;
-    }
-
-    .leaf.top {
-      bottom: 154px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg) scale(0);
-      animation: growLeafTop 1.8s ease forwards;
-      animation-delay: 4.2s;
-    }
-
-    @keyframes growStem {
-      from { height: 0; }
-      to { height: 110px; }
-    }
-
-    @keyframes growLeafLeft {
-      to {
-        width: 46px;
-        height: 28px;
-        opacity: 1;
-        transform: translateX(-100%) rotate(-35deg) scale(1);
-      }
-    }
-
-    @keyframes growLeafRight {
-      to {
-        width: 46px;
-        height: 28px;
-        opacity: 1;
-        transform: translateX(0%) rotate(35deg) scale(1);
-      }
-    }
-
-    @keyframes growLeafTop {
-      to {
-        width: 38px;
-        height: 24px;
-        opacity: 1;
-        transform: translateX(-50%) rotate(45deg) scale(1);
-      }
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 35px;
-      color: #8b7b8e;
-      font-size: 0.98rem;
-      animation: fadeIn 3s ease both;
-    }
-
-    .editable-tip {
-      margin-top: 10px;
-      font-size: 0.95rem;
-      color: #b06d86;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(35px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* 滾動顯示 */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding-top: 30px;
-      }
-
-      .floating-card {
-        padding: 25px 20px;
-      }
-
-      .message {
-        font-size: 1rem;
-      }
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-  <!-- 愛心 -->
-  <div class="hearts">
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
-    <div class="heart">❤</div>
+<div class="container">
+  <h1>謝謝老師 ❤️</h1>
+
+  <div class="typing">
+    老師，謝謝您陪伴我們走過這段青春，
+    您的教導會一直留在我們心裡。
   </div>
 
-  <!-- 光點 -->
-  <div class="sparkles">
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
-    <div class="sparkle"></div>
+  <div class="tree">
+    <div class="stem"></div>
+    <div class="leaf"></div>
   </div>
+</div>
 
-  <div class="container">
-    <section class="hero">
-      <div class="tag">Graduation • Thank You Teacher</div>
-      <h1 contenteditable="true">敬愛的老師，謝謝您</h1>
-      <p contenteditable="true">
-        在畢業的這個時刻，我們想把最真誠的感謝送給您。<br>
-        謝謝您一路上的陪伴、鼓勵與包容，讓我們在成長的路上，變得更勇敢，也更相信自己。
-      </p>
-      <div class="editable-tip">※ 上面的文字可以直接改成你想寫的內容</div>
-    </section>
+<div class="cursor" id="cursor"></div>
 
-    <section class="floating-card reveal">
-      <h2 class="section-title">想對老師說的話</h2>
-      <div class="message" contenteditable="true">
-老師，謝謝您在這段時間裡，總是耐心地教導我們。
-也許我們有時候不夠成熟，有時候讓您操心，但您始終沒有放棄我們。
+<script>
+/* 🌸 櫻花生成 */
+for(let i=0;i<30;i++){
+  let sakura=document.createElement("div");
+  sakura.className="sakura";
+  sakura.style.left=Math.random()*100+"vw";
+  sakura.style.animationDuration=5+Math.random()*5+"s";
+  document.body.appendChild(sakura);
+}
 
-您不只是教我們課本上的知識，
-更教會我們怎麼面對挫折、怎麼對自己負責、怎麼在不安中繼續前進。
+/* ✨ 粒子 */
+setInterval(()=>{
+  let p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"vw";
+  p.style.top=Math.random()*100+"vh";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),5000);
+},200);
 
-畢業不是結束，而是帶著您的教誨，走向更遠的地方。
-未來我們也許會走上不同的路，
-但我們會一直記得，
-曾經有一位老師，用溫暖和認真，照亮了我們的青春。
+/* 💫 滑鼠光點 */
+document.addEventListener("mousemove",(e)=>{
+  const c=document.getElementById("cursor");
+  c.style.left=e.clientX+"px";
+  c.style.top=e.clientY+"px";
+});
+</script>
 
-<span class="highlight">謝謝您，成為我們學生時代裡非常重要的一道光。</span>
-      </div>
-    </section>
-
-    <section class="floating-card reveal">
-      <h2 class="section-title">老師帶給我們的禮物</h2>
-      <div class="quotes">
-        <div class="quote-box">
-          <h3>溫柔的陪伴</h3>
-          <p contenteditable="true">
-            在我們迷惘、緊張、失去方向的時候，
-            是老師一次次提醒我們不要放棄，
-            也讓我們知道，原來有人一直相信著我們。
-          </p>
-        </div>
-        <div class="quote-box">
-          <h3>成長的勇氣</h3>
-          <p contenteditable="true">
-            因為老師，我們學會了即使害怕，
-            也要一步一步往前走。
-            那些被鼓勵過的瞬間，會成為未來的力量。
-          </p>
-        </div>
-        <div class="quote-box">
-          <h3>珍貴的回憶</h3>
-          <p contenteditable="true">
-            教室裡的笑聲、叮嚀、鼓勵與關心，
-            都會成為我們青春裡最溫暖的一部分，
-            也是畢業後最捨不得忘記的畫面。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="floating-card reveal tree-section">
-      <h2 class="section-title">我們會帶著您的愛成長</h2>
-
-      <div class="tree-wrapper">
-        <div class="soil"></div>
-        <div class="stem"></div>
-        <div class="leaf left"></div>
-        <div class="leaf right"></div>
-        <div class="leaf top"></div>
-      </div>
-
-      <div class="message" contenteditable="true">
-就像一顆種子慢慢發芽一樣，
-我們也在老師的照顧與教導中，一點一點長大。
-
-也許現在的我們還不夠完美，
-但因為有老師的陪伴，
-我們學會了努力、堅持、善良與感恩。
-
-未來的日子裡，
-我們會帶著這份溫暖，繼續成長，繼續發光。
-      </div>
-    </section>
-
-    <section class="floating-card reveal">
-      <h2 class="section-title">畢業快樂，也謝謝您</h2>
-      <div class="message" contenteditable="true">
-老師，謝謝您曾經走進我們的青春。
-謝謝您用認真對待每一堂課，
-用關心回應每一個不安，
-也用溫柔接住每一個還在學習長大的我們。
-
-今天我們畢業了，
-但您的教誨不會停在教室裡，
-而是會留在我們心中很久很久。
-
-願您未來的每一天，
-都能像您曾經照亮我們那樣，
-被溫柔以待，也被世界深深珍惜。
-      </div>
-    </section>
-
-    <div class="footer">
-      畢業快樂 ✦ 謝謝老師 ✦ 青春不散場
-    </div>
-  </div>
-
-  <script>
-    // 滾動出現動畫
-    const reveals = document.querySelectorAll(".reveal");
-
-    function showOnScroll() {
-      reveals.forEach((el) => {
-        const windowHeight = window.innerHeight;
-        const elementTop = el.getBoundingClientRect().top;
-        const visiblePoint = 100;
-
-        if (elementTop < windowHeight - visiblePoint) {
-          el.classList.add("active");
-        }
-      });
-    }
-
-    window.addEventListener("scroll", showOnScroll);
-    window.addEventListener("load", showOnScroll);
-
-    // 滑鼠移動背景微漂浮效果
-    document.addEventListener("mousemove", (e) => {
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
-      document.body.style.backgroundPosition = `${x * 20}px ${y * 20}px`;
-    });
-  </script>
 </body>
 </html>
