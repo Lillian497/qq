@@ -408,76 +408,156 @@
   <div class="scene">
     <div class="ground"></div>
 
-    <div class="tree-stage">
-      <svg viewBox="0 0 700 760" aria-label="growing tree animation">
-        <!-- 光暈 -->
-        <g class="glow">
-          <ellipse cx="350" cy="250" rx="170" ry="140" fill="rgba(255,230,240,0.18)"></ellipse>
-          <ellipse cx="350" cy="250" rx="230" ry="190" fill="rgba(255,240,210,0.10)"></ellipse>
-        </g>
+<div class="tree-stage">
+  <svg viewBox="0 0 700 760" aria-label="growing tree animation">
+    <!-- 光暈 -->
+    <g class="glow">
+      <ellipse cx="350" cy="250" rx="170" ry="140" fill="rgba(255,230,240,0.18)"></ellipse>
+      <ellipse cx="350" cy="250" rx="230" ry="190" fill="rgba(255,240,210,0.10)"></ellipse>
+    </g>
 
-        <!-- 樹幹 -->
-        <path class="trunk-path" d="M350 690 C345 620, 348 560, 350 500 C353 430, 347 360, 350 290 C352 235, 348 190, 350 145" />
+    <!-- 樹幹 -->
+    <path class="trunk-path" d="M350 690 C344 620, 345 560, 350 500 C356 430, 352 360, 355 305 C357 250, 354 205, 360 150" />
 
-        <!-- 分枝 -->
-        <path class="branch-path b1" d="M349 420 C315 385, 285 355, 245 330" />
-        <path class="branch-path b2" d="M351 380 C395 345, 430 315, 470 285" />
-        <path class="branch-path b3" d="M350 300 C315 265, 290 235, 260 210" />
-        <path class="branch-path b4" d="M351 250 C385 220, 415 190, 448 160" />
+    <!-- 分枝 -->
+    <path class="branch-path b1" d="M352 470 C320 430, 290 400, 245 370" />
+    <path class="branch-path b2" d="M356 430 C402 395, 445 360, 500 330" />
+    <path class="branch-path b3" d="M357 360 C320 320, 285 285, 245 250" />
+    <path class="branch-path b4" d="M360 315 C405 280, 445 235, 490 190" />
+    <path class="branch-path b1" d="M345 555 C320 525, 295 500, 270 470" />
+    <path class="branch-path b2" d="M352 535 C385 505, 415 480, 445 455" />
 
-        <!-- 葉子 -->
-        <ellipse class="leaf l1" cx="232" cy="325" rx="18" ry="28" fill="#8edc7d" transform="rotate(-32 232 325)" />
-        <ellipse class="leaf l2" cx="250" cy="308" rx="16" ry="25" fill="#75c96b" transform="rotate(18 250 308)" />
-        <ellipse class="leaf l3" cx="480" cy="278" rx="18" ry="28" fill="#92e284" transform="rotate(28 480 278)" />
-        <ellipse class="leaf l4" cx="456" cy="298" rx="16" ry="25" fill="#6fc264" transform="rotate(-18 456 298)" />
-        <ellipse class="leaf l5" cx="247" cy="205" rx="16" ry="26" fill="#8ddd7e" transform="rotate(-25 247 205)" />
-        <ellipse class="leaf l6" cx="270" cy="188" rx="14" ry="22" fill="#71c567" transform="rotate(20 270 188)" />
-        <ellipse class="leaf l7" cx="458" cy="157" rx="16" ry="26" fill="#8cde7d" transform="rotate(24 458 157)" />
-        <ellipse class="leaf l8" cx="433" cy="176" rx="14" ry="22" fill="#74c96b" transform="rotate(-18 433 176)" />
+    <!-- 小分枝 -->
+    <path class="branch-path b3" d="M263 472 C245 455, 230 442, 215 430" style="stroke-width:6;" />
+    <path class="branch-path b4" d="M444 455 C465 438, 485 422, 505 405" style="stroke-width:6;" />
+    <path class="branch-path b1" d="M245 370 C225 355, 210 342, 195 330" style="stroke-width:6;" />
+    <path class="branch-path b2" d="M500 330 C520 315, 535 302, 550 288" style="stroke-width:6;" />
+    <path class="branch-path b3" d="M245 250 C225 232, 210 218, 195 204" style="stroke-width:6;" />
+    <path class="branch-path b4" d="M490 190 C510 175, 526 160, 542 145" style="stroke-width:6;" />
 
-        <!-- 花 -->
-        <g class="flower f1" transform="translate(230 325)">
-          <circle cx="0" cy="-10" r="9" fill="#ffd7e7"/>
-          <circle cx="10" cy="0" r="9" fill="#ffbfd7"/>
-          <circle cx="0" cy="10" r="9" fill="#ffd7e7"/>
-          <circle cx="-10" cy="0" r="9" fill="#ffbfd7"/>
-          <circle cx="0" cy="0" r="5.5" fill="#ffe59f"/>
-        </g>
+    <!-- 葉子：改成尖葉 -->
+    <g class="leaf l1">
+      <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
+            fill="#9be27f" transform="translate(210 430) rotate(-30)" />
+    </g>
 
-        <g class="flower f2" transform="translate(475 278)">
-          <circle cx="0" cy="-10" r="9" fill="#ffd7e7"/>
-          <circle cx="10" cy="0" r="9" fill="#ffbfd7"/>
-          <circle cx="0" cy="10" r="9" fill="#ffd7e7"/>
-          <circle cx="-10" cy="0" r="9" fill="#ffbfd7"/>
-          <circle cx="0" cy="0" r="5.5" fill="#ffe59f"/>
-        </g>
+    <g class="leaf l2">
+      <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
+            fill="#7dce67" transform="translate(235 408) rotate(10)" />
+    </g>
 
-        <g class="flower f3" transform="translate(248 205)">
-          <circle cx="0" cy="-9" r="8" fill="#ffdced"/>
-          <circle cx="9" cy="0" r="8" fill="#ffcade"/>
-          <circle cx="0" cy="9" r="8" fill="#ffdced"/>
-          <circle cx="-9" cy="0" r="8" fill="#ffcade"/>
-          <circle cx="0" cy="0" r="5" fill="#ffe59f"/>
-        </g>
+    <g class="leaf l3">
+      <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
+            fill="#9ee781" transform="translate(520 404) rotate(35)" />
+    </g>
 
-        <g class="flower f4" transform="translate(458 158)">
-          <circle cx="0" cy="-9" r="8" fill="#ffdced"/>
-          <circle cx="9" cy="0" r="8" fill="#ffcade"/>
-          <circle cx="0" cy="9" r="8" fill="#ffdced"/>
-          <circle cx="-9" cy="0" r="8" fill="#ffcade"/>
-          <circle cx="0" cy="0" r="5" fill="#ffe59f"/>
-        </g>
+    <g class="leaf l4">
+      <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
+            fill="#76c95f" transform="translate(485 425) rotate(-20)" />
+    </g>
 
-        <g class="flower f5" transform="translate(350 135)">
-          <circle cx="0" cy="-11" r="10" fill="#ffd7e7"/>
-          <circle cx="11" cy="0" r="10" fill="#ffc4da"/>
-          <circle cx="0" cy="11" r="10" fill="#ffd7e7"/>
-          <circle cx="-11" cy="0" r="10" fill="#ffc4da"/>
-          <circle cx="0" cy="0" r="6" fill="#ffe59f"/>
-        </g>
-      </svg>
-    </div>
-  </div>
+    <g class="leaf l5">
+      <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
+            fill="#95df7a" transform="translate(195 330) rotate(-28)" />
+    </g>
+
+    <g class="leaf l6">
+      <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
+            fill="#6fc35b" transform="translate(225 314) rotate(22)" />
+    </g>
+
+    <g class="leaf l7">
+      <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
+            fill="#9ae37f" transform="translate(552 287) rotate(28)" />
+    </g>
+
+    <g class="leaf l8">
+      <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
+            fill="#79cb63" transform="translate(520 308) rotate(-12)" />
+    </g>
+
+    <g class="leaf l1">
+      <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
+            fill="#8ddc74" transform="translate(192 205) rotate(-30)" />
+    </g>
+
+    <g class="leaf l2">
+      <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
+            fill="#6fc45a" transform="translate(220 218) rotate(18)" />
+    </g>
+
+    <g class="leaf l3">
+      <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
+            fill="#96e07b" transform="translate(543 145) rotate(35)" />
+    </g>
+
+    <g class="leaf l4">
+      <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
+            fill="#74c95f" transform="translate(510 168) rotate(-20)" />
+    </g>
+
+    <g class="leaf l5">
+      <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
+            fill="#88d96f" transform="translate(270 470) rotate(-25)" />
+    </g>
+
+    <g class="leaf l6">
+      <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
+            fill="#6ebf59" transform="translate(295 447) rotate(16)" />
+    </g>
+
+    <g class="leaf l7">
+      <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
+            fill="#90df76" transform="translate(505 404) rotate(30)" />
+    </g>
+
+    <g class="leaf l8">
+      <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
+            fill="#72c55d" transform="translate(468 438) rotate(-18)" />
+    </g>
+
+    <!-- 花 -->
+    <g class="flower f1" transform="translate(212 430)">
+      <circle cx="0" cy="-8" r="7" fill="#ffd7e7"/>
+      <circle cx="8" cy="0" r="7" fill="#ffbfd7"/>
+      <circle cx="0" cy="8" r="7" fill="#ffd7e7"/>
+      <circle cx="-8" cy="0" r="7" fill="#ffbfd7"/>
+      <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+    </g>
+
+    <g class="flower f2" transform="translate(520 405)">
+      <circle cx="0" cy="-8" r="7" fill="#ffd7e7"/>
+      <circle cx="8" cy="0" r="7" fill="#ffbfd7"/>
+      <circle cx="0" cy="8" r="7" fill="#ffd7e7"/>
+      <circle cx="-8" cy="0" r="7" fill="#ffbfd7"/>
+      <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+    </g>
+
+    <g class="flower f3" transform="translate(194 205)">
+      <circle cx="0" cy="-8" r="7" fill="#ffdced"/>
+      <circle cx="8" cy="0" r="7" fill="#ffcade"/>
+      <circle cx="0" cy="8" r="7" fill="#ffdced"/>
+      <circle cx="-8" cy="0" r="7" fill="#ffcade"/>
+      <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+    </g>
+
+    <g class="flower f4" transform="translate(543 145)">
+      <circle cx="0" cy="-8" r="7" fill="#ffdced"/>
+      <circle cx="8" cy="0" r="7" fill="#ffcade"/>
+      <circle cx="0" cy="8" r="7" fill="#ffdced"/>
+      <circle cx="-8" cy="0" r="7" fill="#ffcade"/>
+      <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+    </g>
+
+    <g class="flower f5" transform="translate(360 148)">
+      <circle cx="0" cy="-10" r="8" fill="#ffd7e7"/>
+      <circle cx="10" cy="0" r="8" fill="#ffc4da"/>
+      <circle cx="0" cy="10" r="8" fill="#ffd7e7"/>
+      <circle cx="-10" cy="0" r="8" fill="#ffc4da"/>
+      <circle cx="0" cy="0" r="5" fill="#ffe59f"/>
+    </g>
+  </svg>
+</div>
 
   <div class="captions">
     <div class="caption top-caption line1">三年的時間，悄悄地過去了</div>
