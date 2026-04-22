@@ -24,29 +24,23 @@
       color: white;
     }
 
-    /* 背景天空 */
     .sky {
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 20%, rgba(255, 220, 235, 0.22), transparent 22%),
-        radial-gradient(circle at 80% 18%, rgba(193, 223, 255, 0.22), transparent 24%),
+        radial-gradient(circle at 20% 20%, rgba(255, 220, 235, 0.20), transparent 22%),
+        radial-gradient(circle at 80% 18%, rgba(193, 223, 255, 0.20), transparent 24%),
         radial-gradient(circle at 50% 60%, rgba(255, 238, 185, 0.10), transparent 26%),
-        linear-gradient(to bottom, #111420 0%, #1a2335 40%, #2a3a56 70%, #f9e8df 100%);
+        linear-gradient(to bottom, #10131d 0%, #182235 38%, #22385a 68%, #f0e0d4 100%);
       animation: skyShift 16s ease-in-out infinite alternate;
     }
 
     @keyframes skyShift {
-      0% {
-        filter: brightness(0.95) saturate(1);
-      }
-      100% {
-        filter: brightness(1.08) saturate(1.08);
-      }
+      0% { filter: brightness(0.95) saturate(1); }
+      100% { filter: brightness(1.08) saturate(1.08); }
     }
 
-    /* 星光 */
-    .stars, .petals {
+    .stars, .petals, .fireflies {
       position: fixed;
       inset: 0;
       pointer-events: none;
@@ -68,7 +62,6 @@
       50% { opacity: 1; transform: scale(1.8); }
     }
 
-    /* 花瓣 */
     .petal {
       position: absolute;
       top: -40px;
@@ -92,7 +85,35 @@
       }
     }
 
-    /* 主場景 */
+    .firefly {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 241, 170, 0.95);
+      box-shadow: 0 0 14px rgba(255, 231, 130, 0.9);
+      animation: floatFirefly linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatFirefly {
+      0% {
+        transform: translate(0, 0) scale(0.5);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.85;
+      }
+      50% {
+        transform: translate(18px, -30px) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-12px, -70px) scale(0.6);
+        opacity: 0;
+      }
+    }
+
     .scene {
       position: fixed;
       inset: 0;
@@ -110,18 +131,17 @@
       bottom: 0;
       height: 28vh;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.12), transparent 30%),
-        linear-gradient(to top, #5f7050 0%, #6e825d 25%, #9caf8d 60%, rgba(255,255,255,0) 100%);
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.10), transparent 30%),
+        linear-gradient(to top, #607150 0%, #72845f 26%, #9aac8c 60%, rgba(255,255,255,0) 100%);
       clip-path: ellipse(90% 100% at 50% 100%);
-      opacity: 0.95;
+      opacity: 0.97;
     }
 
-    /* 中央樹 */
     .tree-stage {
       position: absolute;
       bottom: 10vh;
-      width: min(80vw, 700px);
-      height: min(78vh, 760px);
+      width: min(82vw, 760px);
+      height: min(78vh, 780px);
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -134,23 +154,39 @@
       filter: drop-shadow(0 10px 30px rgba(0,0,0,0.18));
     }
 
-    /* 樹的動畫 */
+    .glow {
+      opacity: 0;
+      animation: glowRise 2.5s ease forwards;
+      animation-delay: 7.8s;
+    }
+
+    @keyframes glowRise {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     .trunk-path {
       fill: none;
-      stroke: #6f513f;
-      stroke-width: 16;
+      stroke: #7a5946;
+      stroke-width: 18;
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-dasharray: 1200;
       stroke-dashoffset: 1200;
-      animation: drawTree 4s ease forwards;
+      animation: drawTree 4.2s ease forwards;
       animation-delay: 1.5s;
     }
 
     .branch-path {
       fill: none;
-      stroke: #765743;
-      stroke-width: 9;
+      stroke: #86624d;
+      stroke-width: 10;
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-dasharray: 500;
@@ -158,10 +194,30 @@
       animation: drawBranch 2.2s ease forwards;
     }
 
-    .b1 { animation-delay: 4.8s; }
-    .b2 { animation-delay: 5.2s; }
-    .b3 { animation-delay: 5.6s; }
-    .b4 { animation-delay: 6s; }
+    .twig-path {
+      fill: none;
+      stroke: #8c6851;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 180;
+      stroke-dashoffset: 180;
+      animation: drawBranch 1.5s ease forwards;
+    }
+
+    .b1 { animation-delay: 4.6s; }
+    .b2 { animation-delay: 5.0s; }
+    .b3 { animation-delay: 5.4s; }
+    .b4 { animation-delay: 5.8s; }
+    .b5 { animation-delay: 6.1s; }
+    .b6 { animation-delay: 6.4s; }
+
+    .t1 { animation-delay: 6.6s; }
+    .t2 { animation-delay: 6.8s; }
+    .t3 { animation-delay: 7.0s; }
+    .t4 { animation-delay: 7.2s; }
+    .t5 { animation-delay: 7.4s; }
+    .t6 { animation-delay: 7.6s; }
 
     @keyframes drawTree {
       to { stroke-dashoffset: 0; }
@@ -176,17 +232,24 @@
       transform-origin: center;
       opacity: 0;
       transform: scale(0);
-      animation: leafGrow 1.2s ease forwards;
+      animation: leafGrow 1.15s ease forwards;
+      filter: drop-shadow(0 0 6px rgba(180, 255, 160, 0.18));
     }
 
-    .l1 { animation-delay: 6.1s; }
-    .l2 { animation-delay: 6.4s; }
-    .l3 { animation-delay: 6.7s; }
-    .l4 { animation-delay: 7s; }
-    .l5 { animation-delay: 7.2s; }
-    .l6 { animation-delay: 7.4s; }
-    .l7 { animation-delay: 7.6s; }
-    .l8 { animation-delay: 7.8s; }
+    .l1  { animation-delay: 6.2s; }
+    .l2  { animation-delay: 6.4s; }
+    .l3  { animation-delay: 6.6s; }
+    .l4  { animation-delay: 6.8s; }
+    .l5  { animation-delay: 7.0s; }
+    .l6  { animation-delay: 7.2s; }
+    .l7  { animation-delay: 7.4s; }
+    .l8  { animation-delay: 7.6s; }
+    .l9  { animation-delay: 7.8s; }
+    .l10 { animation-delay: 8.0s; }
+    .l11 { animation-delay: 8.2s; }
+    .l12 { animation-delay: 8.4s; }
+    .l13 { animation-delay: 8.6s; }
+    .l14 { animation-delay: 8.8s; }
 
     @keyframes leafGrow {
       0% {
@@ -208,14 +271,15 @@
       transform-origin: center;
       opacity: 0;
       transform: scale(0);
-      animation: bloom 1.3s ease forwards;
+      animation: bloom 1.25s ease forwards;
     }
 
-    .f1 { animation-delay: 8.1s; }
-    .f2 { animation-delay: 8.4s; }
-    .f3 { animation-delay: 8.7s; }
-    .f4 { animation-delay: 9.0s; }
-    .f5 { animation-delay: 9.3s; }
+    .f1 { animation-delay: 9.0s; }
+    .f2 { animation-delay: 9.3s; }
+    .f3 { animation-delay: 9.6s; }
+    .f4 { animation-delay: 9.9s; }
+    .f5 { animation-delay: 10.2s; }
+    .f6 { animation-delay: 10.5s; }
 
     @keyframes bloom {
       0% {
@@ -232,24 +296,16 @@
       }
     }
 
-    .glow {
-      opacity: 0;
-      animation: glowRise 2.5s ease forwards;
-      animation-delay: 7.8s;
+    .tree-group {
+      animation: treeSway 6s ease-in-out infinite;
+      transform-origin: 350px 690px;
     }
 
-    @keyframes glowRise {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+    @keyframes treeSway {
+      0%, 100% { transform: rotate(-0.7deg); }
+      50% { transform: rotate(0.9deg); }
     }
 
-    /* 字幕 */
     .captions {
       position: fixed;
       inset: 0;
@@ -273,23 +329,23 @@
       top: 12vh;
       font-size: clamp(1.2rem, 2.8vw, 2rem);
       letter-spacing: 2px;
-      animation: subtitleIn 2s ease forwards;
+      animation: subtitleIn 2.6s ease forwards;
     }
 
     .line1 { animation-delay: 0.5s; }
-    .line2 { animation-delay: 3.2s; }
-    .line3 { animation-delay: 6.2s; }
+    .line2 { animation-delay: 3.5s; }
+    .line3 { animation-delay: 6.7s; }
 
     .bottom-caption {
       bottom: 7vh;
       font-size: clamp(1rem, 2.2vw, 1.35rem);
       line-height: 1.9;
       color: rgba(255,255,255,0.96);
-      animation: subtitleIn 2s ease forwards;
+      animation: subtitleIn 3.2s ease forwards;
     }
 
-    .line4 { animation-delay: 9.2s; }
-    .line5 { animation-delay: 13s; }
+    .line4 { animation-delay: 10.5s; }
+    .line5 { animation-delay: 14.5s; }
 
     @keyframes subtitleIn {
       0% {
@@ -314,7 +370,6 @@
       }
     }
 
-    /* 最後大字 */
     .final-message {
       position: fixed;
       inset: 0;
@@ -325,7 +380,7 @@
       opacity: 0;
       pointer-events: none;
       animation: finalShow 3.5s ease forwards;
-      animation-delay: 17s;
+      animation-delay: 19s;
       background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 42%);
     }
 
@@ -356,7 +411,6 @@
       50% { transform: scale(1.03); }
     }
 
-    /* 音樂按鈕 */
     .music-btn {
       position: fixed;
       right: 18px;
@@ -396,6 +450,15 @@
         font-size: 14px;
         padding: 12px 16px;
       }
+
+      .top-caption {
+        top: 11vh;
+      }
+
+      .bottom-caption {
+        bottom: 10vh;
+        width: min(92vw, 900px);
+      }
     }
   </style>
 </head>
@@ -404,160 +467,140 @@
 
   <div class="stars" id="stars"></div>
   <div class="petals" id="petals"></div>
+  <div class="fireflies" id="fireflies"></div>
 
   <div class="scene">
     <div class="ground"></div>
 
-<div class="tree-stage">
-  <svg viewBox="0 0 700 760" aria-label="growing tree animation">
-    <!-- 光暈 -->
-    <g class="glow">
-      <ellipse cx="350" cy="250" rx="170" ry="140" fill="rgba(255,230,240,0.18)"></ellipse>
-      <ellipse cx="350" cy="250" rx="230" ry="190" fill="rgba(255,240,210,0.10)"></ellipse>
-    </g>
+    <div class="tree-stage">
+      <svg viewBox="0 0 700 760" aria-label="growing tree animation">
+        <g class="tree-group">
+          <g class="glow">
+            <ellipse cx="350" cy="255" rx="175" ry="145" fill="rgba(255,230,240,0.18)"></ellipse>
+            <ellipse cx="350" cy="255" rx="235" ry="195" fill="rgba(255,240,210,0.10)"></ellipse>
+          </g>
 
-    <!-- 樹幹 -->
-    <path class="trunk-path" d="M350 690 C344 620, 345 560, 350 500 C356 430, 352 360, 355 305 C357 250, 354 205, 360 150" />
+          <path class="trunk-path" d="M350 690 C344 622, 345 560, 350 505 C356 435, 352 370, 356 315 C358 255, 356 205, 362 150" />
 
-    <!-- 分枝 -->
-    <path class="branch-path b1" d="M352 470 C320 430, 290 400, 245 370" />
-    <path class="branch-path b2" d="M356 430 C402 395, 445 360, 500 330" />
-    <path class="branch-path b3" d="M357 360 C320 320, 285 285, 245 250" />
-    <path class="branch-path b4" d="M360 315 C405 280, 445 235, 490 190" />
-    <path class="branch-path b1" d="M345 555 C320 525, 295 500, 270 470" />
-    <path class="branch-path b2" d="M352 535 C385 505, 415 480, 445 455" />
+          <path class="branch-path b1" d="M352 470 C320 430, 290 400, 245 370" />
+          <path class="branch-path b2" d="M356 430 C402 395, 445 360, 500 330" />
+          <path class="branch-path b3" d="M357 360 C320 320, 285 285, 245 250" />
+          <path class="branch-path b4" d="M360 315 C405 280, 445 235, 490 190" />
+          <path class="branch-path b5" d="M345 555 C320 525, 295 500, 270 470" />
+          <path class="branch-path b6" d="M352 535 C385 505, 415 480, 445 455" />
 
-    <!-- 小分枝 -->
-    <path class="branch-path b3" d="M263 472 C245 455, 230 442, 215 430" style="stroke-width:6;" />
-    <path class="branch-path b4" d="M444 455 C465 438, 485 422, 505 405" style="stroke-width:6;" />
-    <path class="branch-path b1" d="M245 370 C225 355, 210 342, 195 330" style="stroke-width:6;" />
-    <path class="branch-path b2" d="M500 330 C520 315, 535 302, 550 288" style="stroke-width:6;" />
-    <path class="branch-path b3" d="M245 250 C225 232, 210 218, 195 204" style="stroke-width:6;" />
-    <path class="branch-path b4" d="M490 190 C510 175, 526 160, 542 145" style="stroke-width:6;" />
+          <path class="twig-path t1" d="M263 472 C245 455, 230 442, 215 430" />
+          <path class="twig-path t2" d="M444 455 C465 438, 485 422, 505 405" />
+          <path class="twig-path t3" d="M245 370 C225 355, 210 342, 195 330" />
+          <path class="twig-path t4" d="M500 330 C520 315, 535 302, 550 288" />
+          <path class="twig-path t5" d="M245 250 C225 232, 210 218, 195 204" />
+          <path class="twig-path t6" d="M490 190 C510 175, 526 160, 542 145" />
 
-    <!-- 葉子：改成尖葉 -->
-    <g class="leaf l1">
-      <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
-            fill="#9be27f" transform="translate(210 430) rotate(-30)" />
-    </g>
+          <!-- 葉子 -->
+          <g class="leaf l1">
+            <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
+              fill="#9be27f" transform="translate(210 430) rotate(-30)" />
+          </g>
+          <g class="leaf l2">
+            <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
+              fill="#7dce67" transform="translate(235 408) rotate(10)" />
+          </g>
+          <g class="leaf l3">
+            <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
+              fill="#9ee781" transform="translate(520 404) rotate(35)" />
+          </g>
+          <g class="leaf l4">
+            <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
+              fill="#76c95f" transform="translate(485 425) rotate(-20)" />
+          </g>
+          <g class="leaf l5">
+            <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
+              fill="#95df7a" transform="translate(195 330) rotate(-28)" />
+          </g>
+          <g class="leaf l6">
+            <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
+              fill="#6fc35b" transform="translate(225 314) rotate(22)" />
+          </g>
+          <g class="leaf l7">
+            <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
+              fill="#9ae37f" transform="translate(552 287) rotate(28)" />
+          </g>
+          <g class="leaf l8">
+            <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
+              fill="#79cb63" transform="translate(520 308) rotate(-12)" />
+          </g>
+          <g class="leaf l9">
+            <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
+              fill="#8ddc74" transform="translate(192 205) rotate(-30)" />
+          </g>
+          <g class="leaf l10">
+            <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
+              fill="#6fc45a" transform="translate(220 218) rotate(18)" />
+          </g>
+          <g class="leaf l11">
+            <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
+              fill="#96e07b" transform="translate(543 145) rotate(35)" />
+          </g>
+          <g class="leaf l12">
+            <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
+              fill="#74c95f" transform="translate(510 168) rotate(-20)" />
+          </g>
+          <g class="leaf l13">
+            <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
+              fill="#88d96f" transform="translate(270 470) rotate(-25)" />
+          </g>
+          <g class="leaf l14">
+            <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
+              fill="#72c55d" transform="translate(468 438) rotate(-18)" />
+          </g>
 
-    <g class="leaf l2">
-      <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
-            fill="#7dce67" transform="translate(235 408) rotate(10)" />
-    </g>
-
-    <g class="leaf l3">
-      <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
-            fill="#9ee781" transform="translate(520 404) rotate(35)" />
-    </g>
-
-    <g class="leaf l4">
-      <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
-            fill="#76c95f" transform="translate(485 425) rotate(-20)" />
-    </g>
-
-    <g class="leaf l5">
-      <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
-            fill="#95df7a" transform="translate(195 330) rotate(-28)" />
-    </g>
-
-    <g class="leaf l6">
-      <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
-            fill="#6fc35b" transform="translate(225 314) rotate(22)" />
-    </g>
-
-    <g class="leaf l7">
-      <path d="M0 -18 C10 -16 18 -6 18 0 C18 10 8 18 0 24 C-8 18 -18 10 -18 0 C-18 -6 -10 -16 0 -18Z"
-            fill="#9ae37f" transform="translate(552 287) rotate(28)" />
-    </g>
-
-    <g class="leaf l8">
-      <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
-            fill="#79cb63" transform="translate(520 308) rotate(-12)" />
-    </g>
-
-    <g class="leaf l1">
-      <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
-            fill="#8ddc74" transform="translate(192 205) rotate(-30)" />
-    </g>
-
-    <g class="leaf l2">
-      <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
-            fill="#6fc45a" transform="translate(220 218) rotate(18)" />
-    </g>
-
-    <g class="leaf l3">
-      <path d="M0 -16 C9 -15 16 -5 16 0 C16 9 7 16 0 22 C-7 16 -16 9 -16 0 C-16 -5 -9 -15 0 -16Z"
-            fill="#96e07b" transform="translate(543 145) rotate(35)" />
-    </g>
-
-    <g class="leaf l4">
-      <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
-            fill="#74c95f" transform="translate(510 168) rotate(-20)" />
-    </g>
-
-    <g class="leaf l5">
-      <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
-            fill="#88d96f" transform="translate(270 470) rotate(-25)" />
-    </g>
-
-    <g class="leaf l6">
-      <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
-            fill="#6ebf59" transform="translate(295 447) rotate(16)" />
-    </g>
-
-    <g class="leaf l7">
-      <path d="M0 -15 C8 -14 15 -5 15 0 C15 8 6 15 0 20 C-6 15 -15 8 -15 0 C-15 -5 -8 -14 0 -15Z"
-            fill="#90df76" transform="translate(505 404) rotate(30)" />
-    </g>
-
-    <g class="leaf l8">
-      <path d="M0 -14 C8 -13 14 -4 14 0 C14 8 6 14 0 19 C-6 14 -14 8 -14 0 C-14 -4 -8 -13 0 -14Z"
-            fill="#72c55d" transform="translate(468 438) rotate(-18)" />
-    </g>
-
-    <!-- 花 -->
-    <g class="flower f1" transform="translate(212 430)">
-      <circle cx="0" cy="-8" r="7" fill="#ffd7e7"/>
-      <circle cx="8" cy="0" r="7" fill="#ffbfd7"/>
-      <circle cx="0" cy="8" r="7" fill="#ffd7e7"/>
-      <circle cx="-8" cy="0" r="7" fill="#ffbfd7"/>
-      <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
-    </g>
-
-    <g class="flower f2" transform="translate(520 405)">
-      <circle cx="0" cy="-8" r="7" fill="#ffd7e7"/>
-      <circle cx="8" cy="0" r="7" fill="#ffbfd7"/>
-      <circle cx="0" cy="8" r="7" fill="#ffd7e7"/>
-      <circle cx="-8" cy="0" r="7" fill="#ffbfd7"/>
-      <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
-    </g>
-
-    <g class="flower f3" transform="translate(194 205)">
-      <circle cx="0" cy="-8" r="7" fill="#ffdced"/>
-      <circle cx="8" cy="0" r="7" fill="#ffcade"/>
-      <circle cx="0" cy="8" r="7" fill="#ffdced"/>
-      <circle cx="-8" cy="0" r="7" fill="#ffcade"/>
-      <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
-    </g>
-
-    <g class="flower f4" transform="translate(543 145)">
-      <circle cx="0" cy="-8" r="7" fill="#ffdced"/>
-      <circle cx="8" cy="0" r="7" fill="#ffcade"/>
-      <circle cx="0" cy="8" r="7" fill="#ffdced"/>
-      <circle cx="-8" cy="0" r="7" fill="#ffcade"/>
-      <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
-    </g>
-
-    <g class="flower f5" transform="translate(360 148)">
-      <circle cx="0" cy="-10" r="8" fill="#ffd7e7"/>
-      <circle cx="10" cy="0" r="8" fill="#ffc4da"/>
-      <circle cx="0" cy="10" r="8" fill="#ffd7e7"/>
-      <circle cx="-10" cy="0" r="8" fill="#ffc4da"/>
-      <circle cx="0" cy="0" r="5" fill="#ffe59f"/>
-    </g>
-  </svg>
-</div>
+          <!-- 花 -->
+          <g class="flower f1" transform="translate(212 430)">
+            <circle cx="0" cy="-8" r="7" fill="#ffd7e7"/>
+            <circle cx="8" cy="0" r="7" fill="#ffbfd7"/>
+            <circle cx="0" cy="8" r="7" fill="#ffd7e7"/>
+            <circle cx="-8" cy="0" r="7" fill="#ffbfd7"/>
+            <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+          </g>
+          <g class="flower f2" transform="translate(520 405)">
+            <circle cx="0" cy="-8" r="7" fill="#ffd7e7"/>
+            <circle cx="8" cy="0" r="7" fill="#ffbfd7"/>
+            <circle cx="0" cy="8" r="7" fill="#ffd7e7"/>
+            <circle cx="-8" cy="0" r="7" fill="#ffbfd7"/>
+            <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+          </g>
+          <g class="flower f3" transform="translate(194 205)">
+            <circle cx="0" cy="-8" r="7" fill="#ffdced"/>
+            <circle cx="8" cy="0" r="7" fill="#ffcade"/>
+            <circle cx="0" cy="8" r="7" fill="#ffdced"/>
+            <circle cx="-8" cy="0" r="7" fill="#ffcade"/>
+            <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+          </g>
+          <g class="flower f4" transform="translate(543 145)">
+            <circle cx="0" cy="-8" r="7" fill="#ffdced"/>
+            <circle cx="8" cy="0" r="7" fill="#ffcade"/>
+            <circle cx="0" cy="8" r="7" fill="#ffdced"/>
+            <circle cx="-8" cy="0" r="7" fill="#ffcade"/>
+            <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+          </g>
+          <g class="flower f5" transform="translate(360 148)">
+            <circle cx="0" cy="-10" r="8" fill="#ffd7e7"/>
+            <circle cx="10" cy="0" r="8" fill="#ffc4da"/>
+            <circle cx="0" cy="10" r="8" fill="#ffd7e7"/>
+            <circle cx="-10" cy="0" r="8" fill="#ffc4da"/>
+            <circle cx="0" cy="0" r="5" fill="#ffe59f"/>
+          </g>
+          <g class="flower f6" transform="translate(272 470)">
+            <circle cx="0" cy="-8" r="7" fill="#ffd7e7"/>
+            <circle cx="8" cy="0" r="7" fill="#ffbfd7"/>
+            <circle cx="0" cy="8" r="7" fill="#ffd7e7"/>
+            <circle cx="-8" cy="0" r="7" fill="#ffbfd7"/>
+            <circle cx="0" cy="0" r="4.5" fill="#ffe59f"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
 
   <div class="captions">
     <div class="caption top-caption line1">三年的時間，悄悄地過去了</div>
@@ -587,7 +630,6 @@
   </audio>
 
   <script>
-    // 星星
     const stars = document.getElementById("stars");
     for (let i = 0; i < 22; i++) {
       const s = document.createElement("div");
@@ -599,9 +641,8 @@
       stars.appendChild(s);
     }
 
-    // 花瓣
     const petals = document.getElementById("petals");
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 30; i++) {
       const p = document.createElement("div");
       p.className = "petal";
       p.style.left = Math.random() * 100 + "vw";
@@ -611,7 +652,17 @@
       petals.appendChild(p);
     }
 
-    // 音樂控制
+    const fireflies = document.getElementById("fireflies");
+    for (let i = 0; i < 12; i++) {
+      const f = document.createElement("div");
+      f.className = "firefly";
+      f.style.left = (20 + Math.random() * 60) + "vw";
+      f.style.top = (45 + Math.random() * 35) + "vh";
+      f.style.animationDelay = Math.random() * 8 + "s";
+      f.style.animationDuration = (5 + Math.random() * 5) + "s";
+      fireflies.appendChild(f);
+    }
+
     const musicBtn = document.getElementById("musicBtn");
     const bgm = document.getElementById("bgm");
 
