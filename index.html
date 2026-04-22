@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>謝謝老師，畢業快樂！</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            overflow-x: hidden;
+            background-color: #f4f7f6;
+        }
+
+        /* 1. 物理漂浮粒子背景 */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* 放在最後面 */
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+
+        /* 2. 首頁 Hero 區塊 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            min-height: 1.2em; /* 預留高度給打字效果 */
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        /* 3. 內容區塊 */
+        .main-content {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+
+        /* 4. 互動留言卡片 */
+        .message-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* 滑鼠懸停效果 (互動) */
+        .card:hover {
+            transform: translateY(-10px) rotate(3deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #a1c4fd;
+            border-bottom: 2px solid #c2e9fb;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            opacity: 0.7;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="particle-canvas"></canvas>
+
+    <section class="hero">
+        <h1 id="typing"></h1>
+        <p>來自 [你的班級名稱] 的禮物</p>
+    </section>
+
+    <div class="main-content">
+        <h2 class="section-title" data-aos="fade-down">同學的真心話</h2>
+
+        <div class="message-grid">
+            <div class="card" data-aos="flip-left" data-aos-delay="100">
+                <h3>小明</h3>
+                <p>老師謝謝您這幾年的教導，您的物理課真的超有趣，每次實驗都讓我們印象深刻！雖然我要畢業了，但我不會忘記您的。</p>
+            </div>
+
+            <div class="card" data-aos="flip-left" data-aos-delay="300">
+                <h3>小美</h3>
+                <p>老師，謝謝您在我們失落的時候鼓勵我們。您的笑容就像物理裡的溫暖，永遠給我們動力。畢業快樂！</p>
+            </div>
+
+            <div class="card" data-aos="flip-left" data-aos-delay="500">
+                <h3>小華</h3>
+                <p>老師！謝謝您幫我們考前衝刺。希望您未來也一直開開心心，教出更多優秀的學生！</p>
+            </div>
+            
+            </div>
+    </div>
+
+    <footer>
+        <p>© 2024 畢業班級全體同學</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 初始化 AOS 捲動動畫
+        AOS.init({
+            duration: 1000, // 動畫持續時間 (毫秒)
+            once: true,      // 動畫是否只觸發一次
+        });
+
+        // 1. 打字機效果
+        const textToType = "感謝老師，畢業快樂！";
+        const typingElement = document.getElementById("typing");
+        let index = 0;
+
+        function typing() {
+            if (index < textToType.length) {
+                typingElement.innerHTML += textToType.charAt(index);
+                index++;
+                setTimeout(typing, 200); // 打字速度
+            }
+        }
+
+        // 頁面載入後開始打字
+        window.onload = function() {
+            typing();
+            startParticles();
+        };
+
+        // 2. 物理漂浮粒子 (Canvas)
+        function startParticles() {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particlesArray = [];
+
+            // 粒子類別
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 5 + 1; // 隨機大小
+                    this.speedX = Math.random() * 1 - 0.5; // 隨機 X 軸速度
+                    this.speedY = Math.random() * 1 - 0.5; // 隨機 Y 軸速度 (模擬輕微漂浮)
+                    this.color = 'rgba(255, 255, 255, 0.5)';
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    // 邊界碰撞檢測 (物理感)
+                    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // 初始化粒子群
+            function init() {
+                particlesArray = [];
+                for (let i = 0; i < 100; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+
+            // 動畫迴圈
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // 清除畫布
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+                }
+                requestAnimationFrame(animate);
+            }
+
+            init();
+            animate();
+
+            // 視窗縮放時調整 Canvas 大小
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                init();
+            });
+        }
+    </script>
+</body>
+</html>
